@@ -7,18 +7,18 @@ MODE=${2:-table}
 GITHUB_OWNER=$3
 
 if [[ -z $REPOSITORY_LIST || -z $MODE || -z $GITHUB_OWNER ]]; then
-    echo "ERROR: epository list is empty!"
+    echo "ERROR: repository list is empty!"
     echo "Usage: $0 <repository_list_path> <mode> <github_owner>"
     exit 1
 fi
 
-# Function to generate table rows
+# Function to generate list
 generate_repo_list() {
     local index="$1"
     local repo_name="$2"
     local description="$3"
 
-    # Only get base repo name, execlude the username
+    # Only get base repo name, exclude the username
     repo_base_name=$(basename $repo_name)
 
     local repo_hyperlink="<a href=\"https://github.com/$repo_name\">$repo_name</a>"
