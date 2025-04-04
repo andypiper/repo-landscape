@@ -25,3 +25,4 @@ makeronicc/makeroni
 mcauser/awesome-micropython
 mastodon/documentation
 mastodon/blog
+mastodon/joinmastodon
