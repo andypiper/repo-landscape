@@ -27,10 +27,10 @@ jobs:
 
       - name: Generate content
         run: |
-          echo "Repo owner: ${{ github.repository_owner }}"
-          echo "Content mode: ${{ env.content_mode }}"
-          ./generate_landscape.sh repository_list.txt ${{ env.content_mode }} ${{ github.repository_owner }}
-
+            echo "Repo owner: ${{ github.repository_owner }}"
+            echo "Content mode: ${{ env.content_mode }}"
+            ./generate_landscape.sh repository_list.txt "" ${{ env.content_mode }}
+            echo "Content generation completed."
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
