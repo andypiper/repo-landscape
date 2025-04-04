@@ -4,18 +4,18 @@ env:
   content_mode: "table"
 
 on:
-  ## Trigger on merge event to main brnach
+  ## Trigger on merge event to main branch
   push:
     branches: main
     paths:
-      - 'generate_content.sh'
+      - 'generate_landscape.sh'
       - 'repository_list.txt'
       - '.github/workflows/*'
   ## Manual trigger
   workflow_dispatch:
   ## Optional: Schedule trigger to update the content regularly
-  # schedule:
-  #   - cron: '0 0 * * 6' # Run every Saturday at midnight
+  schedule:
+     - cron: '0 0 * * 6' # Run every Saturday at midnight
 
 jobs:
   update-content:
@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "Repo owner: ${{ github.repository_owner }}"
           echo "Content mode: ${{ env.content_mode }}"
-          ./generate_content.sh repository_list.txt ${{ env.content_mode }} ${{ github.repository_owner }}
+          ./generate_landscape.sh repository_list.txt ${{ env.content_mode }} ${{ github.repository_owner }}
 
       - name: Create Pull Request
         id: cpr
