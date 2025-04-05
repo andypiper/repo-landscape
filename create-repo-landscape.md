@@ -1,6 +1,6 @@
 # Create your repo landscape
 
-This instruction will describe the feature and guide you on how to use this repo template to create your own repository landscape.
+This repository was cloned from the template described in this document. However, the original `generate_content.sh` script has been rewritten and renamed to `generate_landscape.sh` to resolve some issues and better suit my personal use case. The remainder of this guide refers to the original template project.
 
 ## Key Features 🚀
 
@@ -74,7 +74,7 @@ Let's dive into the detailed as below:
 
 There is a CI workflow to automatically generate content and open a new Pull Request for your repository landscape, so setting up `GITHUB_TOKEN` permission is required.
 <br>
-Goto: https://github.com/YOUR_USERNAME/YOUR_REPO/settings/actions (Repo > Setting > Action > General), in the `Workflow permission` section, enable following options:
+Goto: <https://github.com/YOUR_USERNAME/YOUR_REPO/settings/actions> (Repo > Setting > Action > General), in the `Workflow permission` section, enable following options:
 
 - Read and write permissions
 - Allow GitHub Actions to create and approve pull requests
@@ -87,7 +87,7 @@ Now we are ready to trigger the CI workflow to update the repo landscape.
 
 - Add your repository list to the file `repository_list.txt` in your repository and merge it into the `main` branch, for example:
 
-```
+```bash
 tungbq/devops-basics
 tungbq/AWSHub
 tungbq/devops-toolkit
@@ -100,12 +100,13 @@ tungbq/awesome-workflow
 
 - NOTE: This step is OPTIONAL, by default we will generate content in `table` format. Skip this step to use the default mode
 - If you want to use the list format, udpate the `content_mode` variable in workflow file `.github/workflows/generate_content.yaml` to `list`:
-  ```yaml
-  # File: .github/workflows/generate_content.yaml
-  env:
-    # Current supported mode: 'table' and 'list'
-    content_mode: 'table'
-  ```
+
+```yaml
+# File: .github/workflows/generate_content.yaml
+env:
+  # Current supported mode: 'table' and 'list'
+  content_mode: 'table'
+```
 
 ### 5. Trigger the CI pipeline
 
@@ -149,4 +150,4 @@ on:
   # other events as needed
 ```
 
-- Check https://crontab.guru/ for the CRON syntax
+- Check <https://crontab.guru/> for the CRON syntax

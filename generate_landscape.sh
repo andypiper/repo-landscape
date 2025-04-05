@@ -264,8 +264,9 @@ fi
 # Start output file
 echo "INFO: Creating/overwriting output file: $OUTPUT_FILE"
 printf "<h1 align=\"center\">Repositories Landscape 💎</h1>\n" > "$OUTPUT_FILE"
-printf "<p align=\"center\">Welcome to the %s repositories landscape 👋</p>\n\n" "$GITHUB_OWNER" >> "$OUTPUT_FILE"
-printf "If you want to create your own repository landscape similar to this, please follow this [**guide**](./create-repo-landscape.md) 📖\n\n" >> "$OUTPUT_FILE"
+printf "<p align=\"center\">Welcome to the <a href=\"https://github.com/%s\">%s</a> repositories landscape 👋🏻</p>\n\n" "$GITHUB_OWNER" "$GITHUB_OWNER" >> "$OUTPUT_FILE"
+printf "A repository landscape provides a visual overview of the most relevant current repositories within an organization or user's profile, making it easier to navigate and discover projects.\n" >> "$OUTPUT_FILE"
+printf "If you want to create your own repository landscape similar to this one, follow this [**guide**](./create-repo-landscape.md) 📖\n" >> "$OUTPUT_FILE"
 
 # Initialize counters
 index=1
