@@ -9,7 +9,7 @@ usage() {
   cat << EOF
 Usage: $0 <repository_list_path> [github_owner] [mode] [output_file]
 
-Generates a Markdown file listing GitHub repositories with descriptions, last push date,
+Generates a Markdown file listing GitHub repositories with descriptions,
 language (logo badge for common languages, text otherwise), and info badges
 (stars, forks, license).
 
@@ -199,23 +199,24 @@ generate_repo_list() {
     local forks_badge="<a href=\"https://github.com/$repo_name/network/members\"><img alt=\"Forks\" src=\"https://img.shields.io/github/forks/$repo_name?style=flat\" height=\"$badge_height\"/></a>"
     local license_badge="<a href=\"https://github.com/$repo_name\"><img alt=\"License\" src=\"https://img.shields.io/github/license/$repo_name?style=flat\" height=\"$badge_height\"/></a>"
 
-
     # Output format for list item
     printf "## %s\n" "$repo_base_name" >> "$output_target"
     printf -- "- URL: %s\n" "$repo_hyperlink" >> "$output_target"
     printf -- "- Description: %s\n" "$description" >> "$output_target"
-    printf -- "- %s %s %s %s\n\n" "$language_output" "$stars_badge" "$forks_badge" "$license_badge" >> "$output_target"
+    # Print Language and License on one line
+    printf -- "- %s %s\n" "$language_output" "$license_badge" >> "$output_target"
+    # Print Activity (Stars and Forks) on a new line
+    printf -- "- Activity: %s %s\n\n" "$stars_badge" "$forks_badge" >> "$output_target"
 }
 
 # Function to generate table row
-# Arguments: index, repo_name, description, language, pushed_at_iso, output_target
+# Arguments: index, repo_name, description, language, output_target
 generate_repo_table() {
     local index="$1"
     local repo_name="$2"
     local description="$3"
     local language="$4"
-    local pushed_at_iso="$5"
-    local output_target="$6"
+    local output_target="$5"
 
     local repo_base_name=$(basename "$repo_name")
     local repo_hyperlink="<a href=\"https://github.com/$repo_name\">$repo_base_name</a>"
@@ -229,30 +230,19 @@ generate_repo_table() {
     local forks_badge="<a href=\"https://github.com/$repo_name/network/members\"><img alt=\"Forks\" src=\"https://img.shields.io/github/forks/$repo_name?style=flat\" height=\"$badge_height\"/></a>"
     local license_badge="<a href=\"https://github.com/$repo_name\"><img alt=\"License\" src=\"https://img.shields.io/github/license/$repo_name?style=flat\" height=\"$badge_height\"/></a>"
 
-    # Format the pushed_at date (YYYY-MM-DD)
-    local pushed_at_formatted="N/A"
-    if [[ -n "$pushed_at_iso" && "$pushed_at_iso" != "null" ]]; then
-        pushed_at_formatted=$(date -d "$pushed_at_iso" +'%Y-%m-%d' 2>/dev/null || echo "Invalid Date")
-        if [[ "$pushed_at_formatted" == "Invalid Date" ]]; then
-             pushed_at_formatted="${pushed_at_iso%%T*}"
-        fi
-    fi
-
     # Add header in the first run (only if index is 1)
     if [[ "$index" -eq 1 ]]; then
-        # Updated header - removed ID column
-        printf "\n| Repository   | Description                                | Last Push  | Language | Stars | Forks | License |\n" >> "$output_target"
-        printf "| :----------- | :----------------------------------------- | :--------- | :------- | :---- | :---- | :------ |\n" >> "$output_target"
+        printf "\n| Repository   | Description                                | Language | Stars | Forks | License |\n" >> "$output_target"
+        printf "| :----------- | :----------------------------------------- | :------- | :---- | :---- | :------ |\n" >> "$output_target"
     fi
 
-    # Escape pipe characters within the description
+    # Escape pipe characters in description to avoid breaking the table
     local safe_description="${description//|/\\|}"
 
-    # Print the table row - removed index/$index
-    printf "| %s | %s | %s | %s | %s | %s | %s |\n" \
+    # Print the table row
+    printf "| %s | %s | %s | %s | %s | %s |\n" \
         "$repo_hyperlink" \
         "$safe_description" \
-        "$pushed_at_formatted" \
         "$language_output" \
         "$stars_badge" \
         "$forks_badge" \
@@ -309,7 +299,7 @@ while IFS= read -r repo_name || [[ -n "$repo_name" ]]; do
     fi
 
     # Extract needed fields: description, language, and pushed_at
-    data_line=$(echo "$response_body" | jq -e -r '[.description // "N/A", .language // "N/A", .pushed_at // ""] | @tsv')
+    data_line=$(echo "$response_body" | jq -e -r '[.description // "N/A", .language // "N/A"] | @tsv')
     jq_exit_code=$?
 
     if [[ $jq_exit_code -ne 0 && $jq_exit_code -ne 4 ]]; then
@@ -319,12 +309,12 @@ while IFS= read -r repo_name || [[ -n "$repo_name" ]]; do
     fi
 
     # Read tab-separated values into variables
-    IFS=$'\t' read -r description language pushed_at_iso <<< "$data_line"
+    IFS=$'\t' read -r description language <<< "$data_line"
 
     # Generate output based on mode
     if [[ "$MODE" == "table" ]]; then
         # Pass the extracted language text to the table function
-        generate_repo_table "$index" "$repo_name" "$description" "$language" "$pushed_at_iso" "$OUTPUT_FILE"
+        generate_repo_table "$index" "$repo_name" "$description" "$language" "$OUTPUT_FILE"
     else
         # Pass the extracted language text to the list function
         generate_repo_list "$index" "$repo_name" "$description" "$language" "$OUTPUT_FILE"
