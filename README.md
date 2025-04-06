@@ -1,8 +1,8 @@
 <h1 align="center">Repositories Landscape 💎</h1>
-<p align="center">Welcome to the andypiper repositories landscape 👋</p>
+<p align="center">Welcome to the <a href="https://github.com/andypiper">andypiper</a> repositories landscape 👋🏻</p>
 
-If you want to create your own repository landscape similar to this, please follow this [**guide**](./create-repo-landscape.md) 📖
-
+A repository landscape provides a visual overview of the most relevant current repositories within an organization or user's profile, making it easier to navigate and discover projects.
+If you want to create your own repository landscape similar to this one, follow this [**guide**](./create-repo-landscape.md) 📖
 
 | Repository   | Description                                | Language | Stars | Forks | License |
 | :----------- | :----------------------------------------- | :------- | :---- | :---- | :------ |
