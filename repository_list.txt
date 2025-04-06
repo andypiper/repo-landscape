@@ -7,6 +7,7 @@ andypiper/mastodon-embeds-examples
 andypiper/ics-event-cli
 andypiper/theindiebeat-gnome-ext
 andypiper/theindiebeat-simple-player
+andypiper/tibr-playlists
 andypiper/handy-scripts
 andypiper/gpl2clr
 andypiper/emf-duckfacts-tildagon
