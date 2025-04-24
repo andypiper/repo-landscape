@@ -8,6 +8,7 @@ andypiper/ics-event-cli
 andypiper/theindiebeat-gnome-ext
 andypiper/theindiebeat-simple-player
 andypiper/tibr-playlists
+andypiper/fw-lid-fprint-daemon
 andypiper/handy-scripts
 andypiper/gpl2clr
 andypiper/emf-duckfacts-tildagon
@@ -22,7 +23,6 @@ andypiper/postmarks
 andypiper/postmarks-ext
 andypiper/use-postmarks
 fediverse-devnet/fedidevs.org
-makeronicc/makeroni
 mcauser/awesome-micropython
 mastodon/documentation
 mastodon/blog
