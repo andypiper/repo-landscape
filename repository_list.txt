@@ -4,6 +4,11 @@ andypiper/my-glitch-in-bio
 andypiper/mastofs
 andypiper/MastoShell
 andypiper/mastodon-embeds-examples
+andypiper/about-brachio
+andypiper/wita
+andypiper/notetaking
+andypiper/presto-lastfm
+andypiper/forgeandcraft-site
 andypiper/ics-event-cli
 andypiper/theindiebeat-gnome-ext
 andypiper/theindiebeat-simple-player
@@ -12,7 +17,7 @@ andypiper/fw-lid-fprint-daemon
 andypiper/handy-scripts
 andypiper/gpl2clr
 andypiper/emf-duckfacts-tildagon
-andypiper/ada-macropad
+andypiper/ada-macropadr
 andypiper/brachiograph-converter-gui
 andypiper/picoboy-code
 andypiper/3d-modelling
@@ -22,6 +27,8 @@ andypiper/picow-enviroplus
 andypiper/postmarks
 andypiper/postmarks-ext
 andypiper/use-postmarks
+andypiper/SocialWeb-RubyWorld2024
+mqtt/mqtt.org
 fediverse-devnet/fedidevs.org
 mcauser/awesome-micropython
 mastodon/documentation
