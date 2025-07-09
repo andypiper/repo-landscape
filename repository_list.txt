@@ -1,6 +1,6 @@
 andypiper/andypiper
 andypiper/andypiper.github.io
-andypiper/my-glitch-in-bio
+andypiper/dotme
 andypiper/mastofs
 andypiper/MastoShell
 andypiper/mastodon-embeds-examples
@@ -17,7 +17,7 @@ andypiper/fw-lid-fprint-daemon
 andypiper/handy-scripts
 andypiper/gpl2clr
 andypiper/emf-duckfacts-tildagon
-andypiper/ada-macropadr
+andypiper/ada-macropad
 andypiper/brachiograph-converter-gui
 andypiper/picoboy-code
 andypiper/3d-modelling
